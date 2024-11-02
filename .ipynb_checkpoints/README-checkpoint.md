@@ -5,7 +5,7 @@ This assignment is 2-part.
 Part 1: Analyze and Explore the Climate Data
      1-Used files climate_starter.ipynb and hawaii.sqlite to complete analysis and data exploration.
      2-Used the SQLAlchemy create_engine() function to connect the SQLite database.
-     3-Used the SQLAlchemy automap_base() function to reflect your tables into classes, and then saved references to the classes named station and measurement.
+     3-Used the SQLAlchemy automap_base() function to reflect your tables into classes, and then save references to the classes named station and measurement.
      4-Linked Python to the database by creating a SQLAlchemy session.
      5-Performed a precipitation analysis and then a station analysis by completing the steps in the following two subsections.
 
@@ -13,17 +13,17 @@ Part 1: Analyze and Explore the Climate Data
       1-Precipitation analysis
         Found the most recent date in the dataset.
         Used that date to get the previous 12 months of precipitation data by querying the previous 12 months of data.
-        *HINT (given) -Don't pass the date as a veriable to your query.
+        *HINT-Don't pass the date as a veriable to your query.
         Selected only the 'date' and 'prcp' values.
         Loaded the query results into a Pandas DataFrame. Explicitly set the column names.
-        Sorted the DataFrame values by 'date'.
+        Sort the DataFrame values by 'date'.
         Plotted the results with DataFrameplot method.
         Used Pandas to print the summary statistices for the precipitation data.
       2-Station analysis
         Designed a query to calculate the total number of stations in the dataset.
         Designed a query to find the most-active stations (the stations that have the most rows).
             Listed the stations and observation counts in decending order.
-            *HINT (given) -Used the func.count function in the query.
+            *HINT-Used the func.count function in the query.
             Answered the question: Which station ID has the greatest number of observations?
         Designed a query that calculates the lowest, highest, and average temperatures filtered on the most-active station ID found in previous query.
             *HINT-Used functions such as func.min, func.max, and func.avg.
