@@ -1,6 +1,6 @@
 # sqlalchemy-challenge
 Module 10 Challenge
-Create a climate analysis about the Honolulu, Hawaii area.
+Created a climate analysis about the Honolulu, Hawaii area.
 This assignment is 2-part.
 Part 1: Analyze and Explore the Climate Data
      1-Used files climate_starter.ipynb and hawaii.sqlite to complete analysis and data exploration.
