@@ -9,12 +9,11 @@ import numpy as np
 #Flask setup
 app=Flask (__name__)
 # Create an engine to connect to the SQLite database
-engine = create_engine("sqlite:///hawaii.sqlite")
-conn=engine.connect()
+engine = create_engine("sqlite:///Resources/hawaii.sqlite")
 
 # reflect an existing database into a new model
 Base = automap_base()
-
+Base.prepare(autoload_with=engine)
 # Save references to each table
 Measurement = Base.classes.measurement
 Station = Base.classes.station
@@ -125,4 +124,4 @@ def get_temp_start_end(start, end):
 if __name__ == "__main__":
         app.run(debug=True)
 
-session.close()
+Session.close()
