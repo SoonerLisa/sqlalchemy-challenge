@@ -54,7 +54,7 @@ Part 2: Design Climate App
     Data: .csv files hawaii.
     1-Design a Flask API based on the new queries. Use Flask to create routes.
     2-/api/v1.0/precepitation 
-        •Convert query results from percipitation analysis for the last 12 months of data, to a dictionary using 'date' as the key and 'prcp' as the value.
+        •Converted query results from percipitation analysis for the last 12 months of data, to a dictionary using 'date' as the key and 'prcp' as the value.
         •Returned the JSON representation of the dictionary.
     3-/api/v1.0/stations
         •Returned a JSON list of stations from the dataset.
