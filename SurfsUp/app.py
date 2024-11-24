@@ -7,13 +7,10 @@ from datetime import datetime, timedelta
 import numpy as np
 
 #Flask setup
-app=Flask (__name__)
+app = Flask(__name__)
 
 # Create an engine to connect to the SQLite database
-from sqlalchemy import create_engine
-
-engine = create_engine("mysql+pymysql://Resources/hawaii.sqlite", pool_pre_ping=True)
-
+engine=create_engine("sqlite:///Resources/hawaii.sqlite")
 
 # reflect an existing database into a new model
 Base = automap_base()
@@ -48,7 +45,7 @@ def get_joined_data():
 def stations():
     # Create our session (link) from Python to the DB
     session = Session()
-    results = session.query(stations.name).all()
+    results = session.query(Station.name).all()
     stations_list = [result[0] for result in results]
     session.close()
     return jsonify(stations_list)
@@ -57,7 +54,7 @@ def stations():
 def get_tobs():
     session = Session()
     most_recent_date = datetime(2017, 8, 23)
-    date = most_recent_date - datetime.timedelta(days=365)
+    date = most_recent_date - timedelta(days=365)
     results = session.query(Measurement.date, Measurement.tobs).\
         filter(Measurement.station == 'USC00519281').\
         filter(Measurement.date >= date).\
@@ -75,17 +72,13 @@ def get_tobs():
 def get_precipitation():
     session = Session()
     most_recent_date = datetime(2017, 8, 23)
-    date = most_recent_date - datetime.timedelta(days=365)
+    date = most_recent_date - timedelta(days=365)
     
     # Query to get precipitation data for the last 12 months
     results = session.query(Measurement.date, Measurement.prcp).\
         filter(Measurement.date >= date).\
-        order_by(Measurement.date).all().desc
-
-    # Convert results to a dictionary
-    precipitation_dict = {date: prcp for date, prcp in results}
-    session.close()   
-    return jsonify(precipitation_dict)
+        order_by(Measurement.date).all()
+    return jsonify(Measurement)
 
 @app.route('/api/v1.0/<start>')
 def get_temp_start(start):
@@ -125,7 +118,20 @@ def get_temp_start_end(start, end):
     session.close()
     return jsonify(temp_dict) #return dict = to previous query but for date range start/end.
 
+@app.route("/")
+def index():
+    return jsonify({
+        "Available Routes": [
+            "/api/v1.0/precipitation",
+            "/api/v1.0/stations",
+            "/api/v1.0/tobs",
+            "/api/v1.0/<start>",
+            "/api/v1.0/<start>/<end>"
+        ]
+    })
+
 if __name__ == "__main__":
-        app.run(debug=True)
+    app.run(debug=True)
+
 
 Session.close()
